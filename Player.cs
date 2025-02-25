@@ -6,27 +6,27 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _jumpForce;
-    [SerializeField] private float _bounceForce;
-    [SerializeField] private float _doubleJumpForce;
+    [SerializeField] private float _moveSpeed = 8f;
+    [SerializeField] private float _jumpForce = 14f;
+    [SerializeField] private float _bounceForce = 0f;
+    [SerializeField] private float _doubleJumpForce = 16f;
     [SerializeField] private bool _canDoubleJump;
 
     [Header("Wall Interactions")]
     [SerializeField] private float _wallJumpDuraction = 0.6f;
-    [SerializeField] private Vector2 _wallJumpForce;
+    [SerializeField] private Vector2 _wallJumpForce = new Vector2(7f, 14f);
     private bool _isWallJumping;
 
     [Header("Knockback")]
-    [SerializeField] private float _knockbackDuration = 1f;
-    [SerializeField] private Vector2 _knockbackPower;
+    [SerializeField] private float _knockbackDuration = 0.65f;
+    [SerializeField] private Vector2 _knockbackPower = new Vector2(3f, 5f);
     private bool _isKnocked;
     private bool _canBeKnocked;
 
     [Header("Collisions")]
-    [SerializeField] private float _groundCheckDistance;
-    [SerializeField] private float _wallCheckDistance;
-    [SerializeField] private float _ceilingCheckDistance;
+    [SerializeField] private float _groundCheckDistance = 0.85f;
+    [SerializeField] private float _wallCheckDistance = 0.65f;
+    [SerializeField] private float _ceilingCheckDistance = 0f;
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private bool _isGrounded;
     [SerializeField] private bool _isAirBorne;
@@ -44,6 +44,8 @@ public class Player : MonoBehaviour
     {
         _playerRigidbody = GetComponent<Rigidbody2D>();
         _playerAnimator = GetComponentInChildren<Animator>();
+        
+        _playerRigidbody.bodyType = RigidbodyType2D.Static;
     }
 
     // Update is called once per frame
@@ -198,7 +200,7 @@ public class Player : MonoBehaviour
         StartCoroutine(KnockbackRoutine());
         _playerAnimator.SetTrigger("knockback");
         _playerRigidbody.velocity = new Vector2(_knockbackPower.x * -_facingDirection, _knockbackPower.y);
-        FindObjectOfType<UIManager>().SetPlayerLives(1);
+        //FindObjectOfType<UIManager>().SetPlayerLives(1);
     }
 
     private void Animations()
