@@ -7,7 +7,7 @@ public class Collectibles : MonoBehaviour
 {
     [SerializeField] private int _collectibleValue = 1;
     
-    private UIManager _uiManager;
+    //private UIManager _uiManager;
     private Animator _animator;
     private void Awake()
     {
