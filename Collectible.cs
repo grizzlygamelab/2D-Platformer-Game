@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectibles : MonoBehaviour
+public class Collectible : MonoBehaviour
 {
     [SerializeField] private int _collectibleValue = 1;
     
