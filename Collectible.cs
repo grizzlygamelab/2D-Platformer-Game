@@ -4,8 +4,8 @@ using UnityEngine;
 public class Collectible : MonoBehaviour
 {
     [SerializeField] private int _collectibleValue = 1;
+    [SerializeField] private bool _hasBeenCollected = false;
     private LevelManager _levelManager;
-    //private UIManager _uiManager;
     private Animator _animator;
     private void Awake()
     {
@@ -16,18 +16,16 @@ public class Collectible : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && !_hasBeenCollected)
         {
             _levelManager.UpdateCollectible();
             _animator.SetTrigger("hasBeenCollected");
-            StartCoroutine(CreateCollectibleFX());
+            _hasBeenCollected = true;
         }
     }
     
-    IEnumerator CreateCollectibleFX()
+    private void DisableFruitOnCollision()
     {
-        yield return new WaitForSeconds(0.3f);
-        //_uiManager.SetDiamondCount(_collectibleValue);
         gameObject.SetActive(false);
     }
 }
