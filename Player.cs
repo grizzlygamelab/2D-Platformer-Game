@@ -190,19 +190,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Knockback()
-    {
-        if(_isKnocked)
-        {
-            return;
-        }
-
-        StartCoroutine(KnockbackRoutine());
-        _playerAnimator.SetTrigger("knockback");
-        _playerRigidbody.velocity = new Vector2(_knockbackPower.x * -_facingDirection, _knockbackPower.y);
-        //FindObjectOfType<UIManager>().SetPlayerLives(1);
-    }
-
     private void Animations()
     {
         _playerAnimator.SetFloat("xVelocity", _playerRigidbody.velocity.x);
@@ -251,5 +238,18 @@ public class Player : MonoBehaviour
         float bounceForce = _jumpForce * amount;
 
         TrampolineBounce(bounceForce);
+    }
+    
+    public void Knockback()
+    {
+        if(_isKnocked)
+        {
+            return;
+        }
+
+        StartCoroutine(KnockbackRoutine());
+        _playerAnimator.SetTrigger("knockBack");
+        _playerRigidbody.velocity = new Vector2(_knockbackPower.x * -_facingDirection, _knockbackPower.y);
+        //FindObjectOfType<UIManager>().SetPlayerLives(1);
     }
 }
