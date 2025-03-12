@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,6 +26,11 @@ public class LevelManager : MonoBehaviour
         {
             GameObject.Find("Character").GetComponent<PlayerAnimations>().ExitAnimation();
         }
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
 }
