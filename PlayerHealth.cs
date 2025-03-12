@@ -29,7 +29,9 @@ public class PlayerHealth : MonoBehaviour
     private IEnumerator RestartLevelRoutine()
     {
         _player.Knockback();
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.75f);
+        GameObject.Find("Character").GetComponent<PlayerAnimations>().ExitAnimation();
+        yield return new WaitForSeconds(0.5f);
         GameObject.Find("Level Manager").GetComponent<LevelManager>().RestartLevel();
     }
 }
